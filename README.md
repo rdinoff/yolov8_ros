@@ -33,7 +33,8 @@ $ ros2 launch yolov8_bringup yolov9.launch.py
 
 - **/yolo/detections**: Objects detected by YOLO using the RGB images. Each object contains a bounding boxes and a class name. It may also include a mak or a list of keypoints.
 - **/yolo/tracking**: Objects detected and tracked from YOLO results. Each object is assigned a tracking ID.
-- **/yolo/debug_image**: Debug images showing the detected and tracked objects. They can be visualized with rviz2.
+- **/yolo/dbg_image**: Debug images showing the detected and tracked objects. They can be visualized with rviz2.
+- **/yolo/dbg_image/compressed**: Debug images compressed (jpg).
 
 #### Parameters
 
@@ -60,7 +61,8 @@ $ ros2 launch yolov8_bringup yolov8_3d.launch.py
 - **/yolo/detections**: Objects detected by YOLO using the RGB images. Each object contains a bounding boxes and a class name. It may also include a mak or a list of keypoints.
 - **/yolo/tracking**: Objects detected and tracked from YOLO results. Each object is assigned a tracking ID.
 - **/yolo/detections_3d**: 3D objects detected. YOLO results are used to crop the depth images to create the 3D bounding boxes and 3D keypoints.
-- **/yolo/debug_image**: Debug images showing the detected and tracked objects. They can be visualized with rviz2.
+- **/yolo/dbg_image**: Debug images showing the detected and tracked objects. They can be visualized with rviz2.
+- **/yolo/dbg_image/compressed**: Debug images compressed (jpg).
 
 #### Parameters
 

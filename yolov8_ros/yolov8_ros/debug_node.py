@@ -34,6 +34,7 @@ from cv_bridge import CvBridge
 from ultralytics.utils.plotting import Annotator, colors
 
 from sensor_msgs.msg import Image
+from sensor_msgs.msg import CompressedImage
 from visualization_msgs.msg import Marker
 from visualization_msgs.msg import MarkerArray
 from yolov8_msgs.msg import BoundingBox2D
@@ -70,6 +71,7 @@ class DebugNode(LifecycleNode):
 
         # pubs
         self._dbg_pub = self.create_publisher(Image, "dbg_image", 10)
+        self._dbg_comp_pub = self.create_publisher(CompressedImage, "dbg_image/compressed", 10)
         self._bb_markers_pub = self.create_publisher(
             MarkerArray, "dgb_bb_markers", 10)
         self._kp_markers_pub = self.create_publisher(
@@ -106,6 +108,7 @@ class DebugNode(LifecycleNode):
         self.get_logger().info(f"Cleaning up {self.get_name()}")
 
         self.destroy_publisher(self._dbg_pub)
+        self.destroy_publisher(self._dbg_comp_pub)
         self.destroy_publisher(self._bb_markers_pub)
         self.destroy_publisher(self._kp_markers_pub)
 
@@ -286,6 +289,8 @@ class DebugNode(LifecycleNode):
         # publish dbg image
         self._dbg_pub.publish(self.cv_bridge.cv2_to_imgmsg(cv_image,
                                                            encoding=img_msg.encoding))
+        self._dbg_comp_pub.publish(self.cv_bridge.cv2_to_compressed_imgmsg(cv_image,
+                                                                           dst_format="jpg"))
         self._bb_markers_pub.publish(bb_marker_array)
         self._kp_markers_pub.publish(kp_marker_array)
 
